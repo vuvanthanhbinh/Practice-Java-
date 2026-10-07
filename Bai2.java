@@ -21,7 +21,6 @@ public class Bai2 {
             this.diemCK = diemCK;
         }
  
-        // return this = trả về chính sinh viên này, nên có thể gọi nối tiếp
         public Student capNhatEmail(String email) {
             this.email = email;
             return this;
