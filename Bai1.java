@@ -1,57 +1,34 @@
-public class Bai1 {
+import java.util.*;
 
-    static class Student {
-        private String mssv;
-        private String name;
-        private double diemCC, diemGK, diemCK;
- 
-        public Student(String mssv, String name, double diemCC, double diemGK, double diemCK) {
-            this.mssv = mssv;
-            this.name = name;
-            setDiemCC(diemCC);
-            setDiemGK(diemGK);
-            setDiemCK(diemCK);
-        }
- 
-        public String getMssv() { 
-        	return mssv; }
-        public String getName() { 
-        	return name; }
-        public double getDiemCC() { 
-        	return diemCC; }
-        public double getDiemGK() { 
-        	return diemGK; }
-        public double getDiemCK() { 
-        	return diemCK; }
- 
-        private static boolean hopLe(double d) { return d >= 0 && d <= 10; }
- 
-        public void setDiemCC(double d) {
-            if (hopLe(d)) diemCC = d;
-            else System.out.println("Điểm chuyên cần không hợp lệ: " + d);
-        }
-        public void setDiemGK(double d) {
-            if (hopLe(d)) diemGK = d;
-            else System.out.println("Điểm giữa kì không hợp lệ: " + d);
-        }
-        public void setDiemCK(double d) {
-            if (hopLe(d)) diemCK = d;
-            else System.out.println("Điểm cuối kì không hợp lệ: " + d);
-        }
- 
-        public double diemTrungBinh() {
-            return diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6;
-        }
-    }
- 
+public class bai1 {
     public static void main(String[] args) {
-        Student a = new Student("B21DCCN001", "Lan", 8, 7.5, 9);
-        Student b = new Student("B21DCCN002", "Minh", 6, 5, 7);
-        Student c = new Student("B21DCCN003", "Hoa", 10, 9, 8);
- 
-        System.out.println(" Msv : " + a.getMssv() + " - " + a.getName() + " - " + a.diemTrungBinh());
-        System.out.println(" Msv : " + b.getMssv() + " - " + b.getName() + " - " + Math.floor(b.diemTrungBinh()));
-        System.out.println(" Msv : " + c.getMssv() + " - " + c.getName() + " - " + c.diemTrungBinh());
-        
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine().trim());
+        Map<String, String> mon = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String s = sc.nextLine().trim();
+            int p = s.indexOf(' ');
+            mon.put(s.substring(0, p), s.substring(p + 1).trim());
+        }
+        int m = Integer.parseInt(sc.nextLine().trim());
+        Map<String, String> gv = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            String s = sc.nextLine().trim();
+            int p = s.indexOf(' ');
+            gv.put(s.substring(0, p), s.substring(p + 1).trim());
+        }
+        int k = Integer.parseInt(sc.nextLine().trim());
+        String[][] lop = new String[k][3];
+        for (int i = 0; i < k; i++) lop[i] = sc.nextLine().trim().split("\\s+");
+        String ma = sc.nextLine().trim();
+        System.out.println("Giang vien: " + gv.get(ma));
+        double tong = 0;
+        for (String[] l : lop) {
+            if (l[0].equals(ma)) {
+                System.out.println(mon.get(l[1]) + " " + l[2]);
+                tong += Double.parseDouble(l[2]);
+            }
+        }
+        System.out.println("Tong: " + String.format(Locale.US, "%.2f", tong));
     }
 }
