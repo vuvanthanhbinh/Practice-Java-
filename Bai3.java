@@ -1,87 +1,22 @@
-import java.util.ArrayList;
- 
-public class Bai3 {
- 
-   
-    static class Student {
-        private String mssv;
-        private String name;
-        private double diemCC, diemGK, diemCK;
- 
-        public Student(String mssv, String name, double diemCC, double diemGK, double diemCK) {
-            this.mssv = mssv;
-            this.name = name;
-            this.diemCC = diemCC;
-            this.diemGK = diemGK;
-            this.diemCK = diemCK;
-        }
- 
-        public String getMssv() { return mssv; }
-        public String getName() { return name; }
- 
-        public double diemTrungBinh() {
-            return diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6;
-        }
+import java.util.*;
+public class bai3 {
+    static String fmt(int t){
+        return t%10 ==0 ? String.valueOf(t/10) : (t/10 ) + "." + (t%10);
     }
- 
-   
-    static class Classroom {
-        private String tenLop;
-        private ArrayList<Student> danhSach = new ArrayList<>();
- 
-        public Classroom(String tenLop) {
-            this.tenLop = tenLop;
-        }
- 
-       
-        public void addStudent(Student s) {
-            for (Student x : danhSach) {
-                if (x.getMssv().equals(s.getMssv())) {
-                    throw new IllegalArgumentException("MSSV " + s.getMssv() + " đã tồn tại");
-                }
-            }
-            danhSach.add(s); 
-        }
- 
-   
-        public String xepLoai(Student s) {
-            double diem = s.diemTrungBinh();
-            if (diem >= 8) {
-                return "Giỏi";
-            } else if (diem >= 6.5) {
-                return "Khá";
-            } else if (diem >= 5) {
-                return "Trung bình";
-            } else {
-                return "Yếu";
-            }
-        }
- 
-       
-        public void inBangDiem() {
-            System.out.println("Lớp " + tenLop);
-            for (Student s : danhSach) {
-                System.out.println(s.getMssv() + " | " + s.getName() + " | " + Math.floor(s.diemTrungBinh()) + " | " + xepLoai(s));
-            }
-            System.out.println("Sĩ số: " + danhSach.size());
-        }
-    }
- 
-    public static void main(String[] args) {
-        Classroom lop = new Classroom("D21CQCN01");
- 
-        lop.addStudent(new Student("B21DCCN001", "Lan", 8, 7.5, 9));
-        lop.addStudent(new Student("B21DCCN002", "Minh", 6, 5, 7));
-        lop.addStudent(new Student("B21DCCN003", "Hoa", 10, 9, 8));
-        lop.addStudent(new Student("B21DCCN004", "Nam", 3, 4, 4));
- 
-       
-        try {
-            lop.addStudent(new Student("B21DCCN002", "Trùng", 5, 5, 5));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Lỗi: " + e.getMessage());
-        }
- 
-        lop.inBangDiem();
+    public static void main(String[] args){
+        Scanner sc = new Scanner (System.in);
+        String ma = sc.nextLine().trim();
+        String ten = sc.nextLine().trim();
+        double toan = Double.parseDouble(sc.nextLine().trim());
+        double ly = Double.parseDouble(sc.nextLine().trim());
+        double hoa = Double.parseDouble(sc.nextLine().trim());
+        int uuTien = 0;
+        String kv = ma.substring(0, 3);
+        if (kv.equals("KV1")) uuTien = 5;
+        else if (kv.equals("KV2")) uuTien = 10;
+        else if (kv.equals("KV3")) uuTien = 25;
+        int tong = (int)Math.round((2*toan + ly + hoa) * 10);
+        String tt = (tong + uuTien) >= 240 ? "TRUNG TUYEN" : "TRUOT";
+        System.out.println(ma + " " + ten + " " + fmt(uuTien) + " " + fmt(tong) + " " + tt);
     }
 }
